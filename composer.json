@@ -1,0 +1,21 @@
+{
+    "name": "elefant/app-polls",
+    "type": "elefant-app",
+    "description": "A reusable, embeddable, native polling component for the Elefant CMS",
+    "keywords": ["polls", "opinions", "stats", "elefant", "cms", "app"],
+    "license": "MIT",
+    "version": "0.7-beta",
+	"authors": [
+		{
+			"name": "BronyBorn",
+			"email": "minecraftsolutionsinc@gmail.com",
+			"homepage": "http://www.elefantCMS.com/"
+		}
+	],
+    "repositories": [
+        {"type": "git", "url": "http://github.com/jbroadway/elefant_installer"}
+    ],
+    "require": {
+        "elefant/app-installer": "*"
+    }
+}

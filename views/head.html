@@ -1,0 +1,7 @@
+<select id="poll_select">
+	<option>-- Select A Poll --</option>
+	{% foreach polls as id, title %}
+	<option value="{{ id }}"{% if id == $data->active %} selected{% end %}>{{ title }}</option>
+	{% end %}
+</select>
+<button onclick="poll.get($('#poll_select').val(),'poll');">Change Poll</button>

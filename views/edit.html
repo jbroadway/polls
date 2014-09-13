@@ -1,0 +1,21 @@
+<form id="poll_edit" action="/polls/edit/{{ id }}" method="post">
+	<label>Poll Title</label><br/>
+	<input name="title" type="text" value="{{ title }}" size="50" required /><br/>
+	<label>Question (<span id="poll_desc_count">{{ desc|140 - strlen(%s) }}</span> left)</label><br/>
+	<input name="desc" type="text" value="{{ desc }}" size="70" maxlength="140" onkeyup="$('#poll_desc_count').text(140 - $(this).val().length);" required /><br/>
+	<input type="checkbox" name="votable" id="poll_votable" {% if votable %}checked{% end %}/> <label for="poll_votable">Can Be Voted On?</label><br/>
+	<input type="checkbox" name="visible" id="poll_visible" {% if visible %}checked{% end %}/> <label for="poll_visible">Is Viewable By Public?</label><br/>
+	<input type="checkbox" name="default" id="poll_default" {% if default %}checked{% end %}/> <label for="poll_default">Is Default?</label><br/>
+	<label>Allowed Choices (max)</label><br/>
+	<input id="poll_allowed" name="allowed" type="number" min="1" {% if options %}max="{{ options|count }}" {% end %}value="{% if allowed %}{{ allowed }}{% else %}1{% end %}" required /><br/>
+	<label>Required Choices (min)</label><br/>
+	<input id="poll_required" name="required" type="number" min="1" {% if options %}max="{{ options|count }}" {% end %}value="{% if required %}{{ required }}{% else %}1{% end %}" required /><br/>
+	{% if options %}
+	<label>Available Choices ({{ options|count }} total):</label><br/>
+	<pre id="poll_options">- {{ options|implode('<br/>- ',%s) }}</pre>
+	{% else %}
+	<label>Available Choices (<span id="poll_options_count">0</span>)</label><br/>
+	<textarea id="poll_options" name="options" rows="20" cols="30" required></textarea><br/>
+	{% end %}
+	<input type="submit" value="Submit" /> &nbsp; <a href="/poll/admin">Cancel</a>
+</form>

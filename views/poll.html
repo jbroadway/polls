@@ -1,0 +1,10 @@
+<p style="font-size:14px;font-weight:bold;">{{ desc|none }} ({{ res->total }} total){% if User::require_login() && !$data->votable %} - Closed to voting{% end %}</p>
+{% foreach options as option %}
+<div style="font-size:12px;">
+<div>- {{ option }} </div>
+<div class="poll-option" style="width:{{ res->grouped[$data->option] / $data->res->total * 100 }}%;"> {{ (int) ($data->res->grouped[$data->option] / $data->res->total * 100) }}% ({{ res->grouped[$data->option] }} votes) </div>
+</div>
+{% end %}
+{% if votable %}
+<button onclick="poll.get({{ id }}, 'vote')">Change Vote</button>
+{% end %}

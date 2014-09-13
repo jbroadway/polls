@@ -1,0 +1,42 @@
+<p><a href="/polls/admin">{"Return to poll list"}</a></p>
+
+<p style="float: left">
+{! navigation/pager?style=results&url=[url]&total=[total]&count=[count]&limit=[limit] !}
+</p>
+
+{% if total > $data->limit %}
+<div style="float: right">
+{! navigation/pager?style=numbers&url=[url]&total=[total]&count=[count]&limit=[limit] !}
+</div>
+{% end %}
+
+<p>
+<table width="100%">
+	<tr>
+		<th width="20%">{"User"}</th>
+		<th width="25%">{"Timestamp"}</th>
+		<th width="20%">{"IP Address"}</th>
+		<th width="20%">{"Votes"}</th>
+		<th width="15%">&nbsp;</th>
+	</tr>
+{% foreach items as item %}
+	<tr>
+		<td>{{ item->user_id|User::get(%s)->name }}</td>
+		<td>{{ item->ts|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
+		<td>{{ item->ip }}</td>
+		<td>
+			{% foreach array_values($data->item->votes) as index, state %}
+				{% if state == 'true' %}
+				<span>{{ $data->item->poll()->options[$data->index] }}</span><br/>
+				{% end %}
+			{% end %}
+		</td>
+		<td style="text-align: right;padding-right:15px;">
+			<a href="/polls/delete/{{ item->id }}?vote"
+			   onclick="return confirm ('{"Are you sure you want to permanently delete this vote?"}');"
+			>{"Delete"}</a>
+		</td>
+	</tr>
+{% end %}
+</table>
+</p>

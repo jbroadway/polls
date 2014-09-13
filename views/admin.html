@@ -1,0 +1,40 @@
+<p><a href="/polls/add">{"Create a new poll"}</a></p>
+
+<p style="float: left">
+{! navigation/pager?style=results&url=[url]&total=[total]&count=[count]&limit=[limit] !}
+</p>
+
+{% if total > $data->limit %}
+<div style="float: right">
+{! navigation/pager?style=numbers&url=[url]&total=[total]&count=[count]&limit=[limit] !}
+</div>
+{% end %}
+
+<p>
+<table width="100%">
+	<tr>
+		<th width="25%">{"Title"}</th>
+		<th width="25%">{"Created"}</th>
+		<th width="25%">{"Latest Edit"}</th>
+		<th width="5%">{"Votes"}</th>
+		<th width="5%">{"Default"}</th>
+		<th width="15%">&nbsp;</th>
+	</tr>
+{% foreach items %}
+	<tr>
+		<td><a href="/polls/{{ loop_value->id }}"/>{{ loop_value->title }}</a></td>
+		<td>{{ loop_value->creator|User::get(%s)->name }} on {{ loop_value->created|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
+		<td>{{ loop_value->editor|User::get(%s)->name }} on {{ loop_value->edited|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
+		<td><a href="/polls/votes/{{ loop_value->id }}" title="{" Browse results "}">{{ loop_value->id|poll_votes_count }}</a></td>
+		<td>{% if loop_value->default %}Yes{% else %}No{% end %}</td>
+		<td style="text-align: right">
+			<a href="/polls/edit/{{ loop_value->id }}">{"Edit"}</a>
+			&nbsp;|&nbsp;
+			<a href="/polls/delete/{{ loop_value->id }}" 
+			   onclick="return confirm ('{"Are you sure you want to permanently delete this poll and all associated votes?"}');"
+			>{"Delete"}</a>
+		</td>
+	</tr>
+{% end %}
+</table>
+</p>
