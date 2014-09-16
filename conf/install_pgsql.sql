@@ -1,7 +1,7 @@
 create table polls (
 	id serial not null primary key,
 	title character varying(48) not null,
-	desc character varying(140) not null,
+	description character varying(140) not null,
 	created timestamp not null,
 	creator integer not null,
 	edited timestamp not null,

@@ -1,7 +1,7 @@
 create table polls (
 	id integer primary key,
 	title varchar(48) not null,
-	desc varchar(140) not null,
+	description varchar(140) not null,
 	created datetime not null,
 	creator integer not null,
 	edited datetime not null,
