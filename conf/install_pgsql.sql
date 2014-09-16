@@ -10,7 +10,7 @@ create table polls (
 	required integer not null default 1,
 	votable boolean not null default FALSE,
 	visible boolean not null default FALSE,
-	default boolean default FALSE,
+	fallback boolean default FALSE,
 	options text not null
 );
 create index poll_title on polls (title);

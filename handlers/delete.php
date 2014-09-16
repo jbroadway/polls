@@ -15,7 +15,7 @@ if (!$this->params[0]) {
 	
 if (isset($_GET['vote']) && User::require_acl('polls/votes')) {
 	$item = polls\Votes::get($this->params[0]);
-	$user = $item->user()->name;
+	$user = User::get($item->user_id)->name;
 	$poll = $item->poll()->title;
 	if (!$item->remove()) {
 		@error_log('Error: polls/delete/'. $this->params[0] .'?vote - '. $item->error);

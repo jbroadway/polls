@@ -10,7 +10,7 @@ create table polls (
 	required int not null default 1,
 	votable boolean not null default FALSE,
 	visible boolean not null default FALSE,
-	default boolean default FALSE,
+	fallback boolean default FALSE,
 	options text not null
 	index (title),
 	index (ts)

@@ -33,7 +33,7 @@ if (!$f->submit()) {
 	$p->editor = User::$user->id;
 	$p->votable = isset($_POST['votable']) ? 1 : 0;
 	$p->visible = isset($_POST['visible']) ? 1 : 0;
-	$p->default = isset($_POST['default']) ? 1 : 0;
+	$p->fallback = isset($_POST['default']) ? 1 : 0;
 	$p->options = isset($_POST['options']) ? array_filter(explode("\n",str_replace("\r",'',$_POST['options']))) : $p->options;
 	$p->allowed = ($_POST['allowed']) ? $_POST['allowed'] : 1;
 	$p->required = ($_POST['required']) ? $_POST['required'] : 1;
@@ -47,7 +47,7 @@ if (!$f->submit()) {
 	
 	if(isset($_POST['default'])) {
 		$polls = polls\Poll::query()
-			->where('default',true)
+			->where('fallback',true)
 			->fetch();
 		foreach($polls as $poll) {
 			if ($poll->id != $this->params[0]) {

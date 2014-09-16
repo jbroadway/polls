@@ -13,7 +13,7 @@ require_once ('apps/polls/lib/Functions.php');
 
 $limit = 15;
 $num = is_numeric($_GET['page']) ? $_GET['page'] : 1; // from the URL, e.g. /myapp/handler/#
-$offset = ($num - 1) * $limit;
+$offset = $num * $limit;
 
 $items = polls\Poll::query()
 	->order('edited','desc')

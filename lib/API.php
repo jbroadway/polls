@@ -15,7 +15,7 @@ class API extends \Restful {
 			}
 		} else {
 			$p = Poll::query()
-				->where('default',true)
+				->where('fallback',true)
 				->or_where('visible',true)
 				->order('id','desc')
 				->single();
