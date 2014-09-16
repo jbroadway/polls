@@ -12,7 +12,7 @@ $page->layout = 'admin';
 require_once ('apps/polls/lib/Functions.php');
 
 $limit = 15;
-$num = is_numeric($_GET['page']) ? $_GET['page'] : 1; // from the URL, e.g. /myapp/handler/#
+$num = is_numeric($_GET['page']) ? $_GET['page'] : 0; // from the URL, e.g. /myapp/handler/#
 $offset = $num * $limit;
 
 $items = polls\Poll::query()
