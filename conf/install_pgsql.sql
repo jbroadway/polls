@@ -13,10 +13,10 @@ create table polls (
 	fallback boolean default FALSE,
 	options text not null
 );
-create index poll_default on polls (fallback);
-create index poll_visible on polls (visible);
+create index polls_fallback on polls (fallback);
+create index polls_visible on polls (visible);
 
-create table poll_votes (
+create table polls_votes (
 	id serial not null primary key,
 	poll_id integer not null,
 	ts timestamp not null,
@@ -24,4 +24,4 @@ create table poll_votes (
 	user_id integer,
 	results text not null
 );
-create index poll_id on poll_votes (poll_id, ts);
+create index polls_id on polls_votes (poll_id, ts);

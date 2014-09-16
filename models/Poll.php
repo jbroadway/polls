@@ -16,7 +16,9 @@ class Poll extends \ExtendedModel {
 	
 	public function totals () {
 		$list = $this->votes();
+		$list = $list ? $list : array();
 		$options = $this->options;
+		$options = $options ? $options : array();
 		$votes = array();
 		$mine = array();
 		$user = \User::is_valid() ? \User::$user->id : 0;

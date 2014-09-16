@@ -16,7 +16,7 @@ create table polls (
 	index (fallback)
 );
 
-create table poll_votes (
+create table polls_votes (
 	id int not null auto_increment primary key,
 	poll_id int not null,
 	ts datetime not null,

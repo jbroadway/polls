@@ -1,4 +1,4 @@
-<p>{{ desc|none }}{% if allowed == $data->required %}(Pick {{ allowed|none }}){% else %}(Pick {{ required|var_export }}-{{ allowed|none }} choices){% end %}</p>
+<p>{{ desc|none }}{% if allowed == $data->required %}(Pick {{ allowed }}){% else %}(Pick {{ required }}-{{ allowed }} choices){% end %}</p>
 {% foreach options as index, option %}
 <input id="poll_option-{{ index }}" class="poll_option" value="{{ option }}" type="{% if allowed > 1 %}checkbox"{% else %}radio" name="poll_option"{% end %}{% if !empty($data->votes) && $data->votes[$data->option] === 'true' %}checked {% end %}/>
 <label for="poll_option-{{ index }}">{{ option }}</label><br/>
