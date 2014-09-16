@@ -32,7 +32,7 @@ foreach ($sqldata as $sql) {
 
 if ($error) {
 	DB::rollback ();
-	echo '<p class="visible-notice">Error: ' . $error . '</p>';
+	@error_log('Error: polls/install - ' . $error);
 	echo '<p>Install failed.</p>';
 	return;
 }
