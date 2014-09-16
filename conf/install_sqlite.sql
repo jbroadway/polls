@@ -13,8 +13,8 @@ create table polls (
 	fallback boolean default 0,
 	options text not null
 );
-create index poll_title on polls (title);
-create index poll_ts on polls (ts);
+create index poll_default on polls (fallback);
+create index poll_visible on polls (visible);
 
 create table poll_votes (
 	id integer primary key,

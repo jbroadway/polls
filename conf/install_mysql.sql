@@ -12,8 +12,8 @@ create table polls (
 	visible boolean not null default FALSE,
 	fallback boolean default FALSE,
 	options text not null
-	index (title),
-	index (ts)
+	index (visible),
+	index (fallback)
 );
 
 create table poll_votes (
