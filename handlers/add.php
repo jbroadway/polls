@@ -6,9 +6,7 @@
 
 $page->layout = 'admin';
 
-if (!User::require_admin()||!User::require_acl('poll')) {
-	$this->redirect('/');
-}
+$this->require_acl ('admin', 'polls');
 
 $p = new polls\Poll (array (
 	'title' => 'Untitled',
