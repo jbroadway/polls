@@ -1,13 +1,9 @@
 <?php
 
-if (!User::require_admin()) {
-	$this->redirect('/user/login');
-}
-if (!User::require_acl('polls')) {
-	$this->redirect($_COOKIE['elefant_last_page']);
-}
+$this->require_acl ('admin', 'polls');
 
 $page->layout = 'admin';
+$page->title = __ ('Polls');
 
 require_once ('apps/polls/lib/Functions.php');
 
