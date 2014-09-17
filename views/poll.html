@@ -1,4 +1,4 @@
-<p style="font-size:14px;font-weight:bold;">{{ description|none }} ({{ res->total }} total){% if User::require_login() && !$data->votable %} - Closed to voting{% end %}</p>
+<p style="font-size:14px;font-weight:bold;">{{ question|none }} ({{ res->total }} total){% if User::require_login() && !$data->votable %} - Closed to voting{% end %}</p>
 {% foreach options as option %}
 <div style="font-size:12px;">
 <div>- {{ option }} </div>

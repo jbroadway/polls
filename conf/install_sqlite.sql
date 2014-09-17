@@ -1,7 +1,7 @@
 create table polls (
 	id integer primary key,
 	title varchar(48) not null,
-	description varchar(140) not null,
+	question varchar(140) not null,
 	created datetime not null,
 	creator integer not null,
 	edited datetime not null,
@@ -22,6 +22,6 @@ create table polls_votes (
 	ts datetime not null,
 	ip varchar(15) not null,
 	user_id integer,
-	results text not null
+	votes text not null
 );
 create index polls_id on polls_votes (poll_id, ts);

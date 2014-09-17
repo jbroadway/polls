@@ -12,7 +12,7 @@ if (!User::require_admin()||!User::require_acl('poll')) {
 
 $p = new polls\Poll (array (
 	'title' => 'Untitled',
-	'desc' => 'Please select an option.',
+	'question' => 'Please select an option.',
 	'created' => gmdate ('Y-m-d H:i:s'),
 	'creator' => User::$user->id,
 	'edited' => gmdate ('Y-m-d H:i:s'),

@@ -28,7 +28,7 @@ if (!$f->submit()) {
 	echo View::render ('polls/edit', $o);
 } else {
 	$p->title = $_POST['title'];
-	$p->description = $_POST['description'];
+	$p->question = $_POST['question'];
 	$p->edited = gmdate ('Y-m-d H:i:s');
 	$p->editor = User::$user->id;
 	$p->votable = isset($_POST['votable']) ? 1 : 0;

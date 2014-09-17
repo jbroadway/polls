@@ -2,7 +2,7 @@
 	<label>Poll Title</label><br/>
 	<input name="title" type="text" value="{{ title }}" size="50" required /><br/>
 	<label>Question (<span id="poll_desc_count">{{ desc|140 - strlen(%s) }}</span> left)</label><br/>
-	<input name="description" type="text" value="{{ description }}" size="70" maxlength="140" onkeyup="$('#poll_desc_count').text(140 - $(this).val().length);" required /><br/>
+	<input name="question" type="text" value="{{ question }}" size="70" maxlength="140" onkeyup="$('#poll_desc_count').text(140 - $(this).val().length);" required /><br/>
 	<input type="checkbox" name="votable" id="poll_votable" {% if votable %}checked{% end %}/> <label for="poll_votable">Can Be Voted On?</label><br/>
 	<input type="checkbox" name="visible" id="poll_visible" {% if visible %}checked{% end %}/> <label for="poll_visible">Is Viewable By Public?</label><br/>
 	<input type="checkbox" name="default" id="poll_default" {% if default %}checked{% end %}/> <label for="poll_default">Is Default?</label><br/>
@@ -17,5 +17,5 @@
 	<label>Available Choices (<span id="poll_options_count">0</span>)</label><br/>
 	<textarea id="poll_options" name="options" rows="20" cols="30" required></textarea><br/>
 	{% end %}
-	<input type="submit" value="Submit" /> &nbsp; <a href="/poll/admin">Cancel</a>
+	<input type="submit" value="Submit" /> &nbsp; <a href="/polls/admin">Cancel</a>
 </form>

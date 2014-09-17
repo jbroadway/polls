@@ -1,7 +1,7 @@
 create table polls (
 	id int not null auto_increment primary key,
 	title varchar(48) not null,
-	desc varchar(140) not null,
+	question varchar(140) not null,
 	created datetime not null,
 	creator int not null,
 	edited datetime not null,
@@ -11,7 +11,7 @@ create table polls (
 	votable boolean not null default FALSE,
 	visible boolean not null default FALSE,
 	fallback boolean default FALSE,
-	options text not null
+	options text not null,
 	index (visible),
 	index (fallback)
 );
@@ -22,6 +22,6 @@ create table polls_votes (
 	ts datetime not null,
 	ip varchar(15) not null,
 	user_id int,
-	results text not null,
+	votes text not null,
 	index (poll_id, ts)
 );

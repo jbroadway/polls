@@ -1,7 +1,7 @@
 create table polls (
 	id serial not null primary key,
 	title character varying(48) not null,
-	description character varying(140) not null,
+	question character varying(140) not null,
 	created timestamp not null,
 	creator integer not null,
 	edited timestamp not null,
@@ -22,6 +22,6 @@ create table polls_votes (
 	ts timestamp not null,
 	ip character varying(15) not null,
 	user_id integer,
-	results text not null
+	votes text not null
 );
 create index polls_id on polls_votes (poll_id, ts);
