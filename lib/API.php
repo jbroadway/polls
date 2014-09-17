@@ -54,6 +54,7 @@ class API extends \Restful {
 		$v = Votes::query()->where('poll_id',$id)->where('user_id',\User::$user->id)->single();
 		$poll = Poll::get($id);
 		$options = $poll->options;
+		$question = $poll->question;
 		$allowed = $poll->allowed;
 		$required = $poll->required;
 		$votes = $v->votes ? $v->votes : array();
@@ -66,6 +67,7 @@ class API extends \Restful {
 				'allowed'=>$allowed,
 				'required'=>$required,
 				'votes'=>$votes,
+				'question'=>$question,
 				'options'=>$options
 			)
 		);

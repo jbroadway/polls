@@ -1,4 +1,4 @@
-create table polls (
+create table #prefix#polls (
 	id int not null auto_increment primary key,
 	title varchar(48) not null,
 	question varchar(140) not null,
@@ -16,7 +16,7 @@ create table polls (
 	index (fallback)
 );
 
-create table polls_votes (
+create table #prefix#polls_votes (
 	id int not null auto_increment primary key,
 	poll_id int not null,
 	ts datetime not null,
