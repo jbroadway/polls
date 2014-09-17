@@ -1,8 +1,6 @@
 <?php
 
-if (!User::require_admin()) {
-	$this->redirect('/polls');
-}
+$this->require_acl ('admin', 'polls');
 
 $page->layout = 'admin';
 
