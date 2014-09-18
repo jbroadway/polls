@@ -31,6 +31,7 @@ class API extends \Restful {
 		$o = (object) $p->data;
 		$o->options = $p->options;
 		$o->res = (object) $p->totals(); //array('total'=>INTEGER, 'grouped'=>ARRAY, 'mine'=>ARRAY)
+		$o->total = $o->res->total > 0 ? $o->res->total : 1;
 		$o->allowed = $p->allowed;
 		$dovote = \User::require_login() ? (array_sum($o->res->mine) > 0 && !isset($_GET['vote'])) ? false : true : false;
 		

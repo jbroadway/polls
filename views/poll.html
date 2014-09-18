@@ -2,7 +2,7 @@
 {% foreach options as option %}
 <div style="font-size:12px;">
 <div>- {{ option }} </div>
-<div class="poll-option" style="width:{{ res->grouped[$data->option] / $data->res->total * 100 }}%;"> {{ (int) ($data->res->grouped[$data->option] / $data->res->total * 100) }}% ({{ res->grouped[$data->option] }} votes) </div>
+<div class="poll-option" style="width:{{ res->grouped[$data->option] / $data->total * 100 }}%;"> {{ (int) ($data->res->grouped[$data->option] / $data->total * 100) }}% ({{ res->grouped[$data->option] }} votes) </div>
 </div>
 {% end %}
 {% if User::require_login() && $data->votable %}

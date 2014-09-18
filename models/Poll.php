@@ -34,8 +34,7 @@ class Poll extends \ExtendedModel {
 				}
 			}
 		}
-		$sum = array_sum($votes);
-		return array('total'=> $sum > 0 ? $sum : 1,'grouped'=>$votes,'mine'=>$mine);
+		return array('total'=>array_sum($votes),'grouped'=>$votes,'mine'=>$mine);
 	}
 	public function option($index) {
 		return $this->options[$index];
