@@ -2,12 +2,15 @@
 
 namespace polls;
 
+use \User;
+use \View;
+
 /**
  * Provides JSON API.
  */
 class API extends \Restful {
 
-	public function get_poll($id) {
+	public function get_poll($id, $override=false) {
 		if ($id > 0) {
 			$p = new Poll ($id);
 			if ($p && !$p->visible) {
@@ -29,30 +32,36 @@ class API extends \Restful {
 			return $this->error('The requested poll could not be found.');
 		}
 		$o = (object) $p->data;
-		$o->options = $p->options;
 		$o->res = (object) $p->totals(); //array('total'=>INTEGER, 'grouped'=>ARRAY, 'mine'=>ARRAY)
-		$o->total = $o->res->total > 0 ? $o->res->total : 1;
-		$o->allowed = $p->allowed;
-		$dovote = \User::require_login() ? (array_sum($o->res->mine) > 0 && !isset($_GET['vote'])) ? false : true : false;
+		$dovote = User::require_login() ? ((array_sum($o->res->mine) > 0 && !isset($_GET['vote'])) || $override ) ? false : true : false;
 		
 		if ($dovote) {
 			return $this->get_vote($id);
 		}
+		
+		$o->options = $p->options;
+		$o->total = $o->res->total > 0 ? $o->res->total : 1;
+		$o->allowed = $p->allowed;
+		$o->voted = (bool) array_sum($o->res->mine);
+		
 		$rv = array();
 		$rv['id'] = $id;
-		$rv['html'] = \View::render('polls/poll',$o);
+		$rv['html'] = View::render('polls/poll',$o);
 		
 		return $rv;
 	
 	}
 	public function get_vote($id) {
-		if (!\User::require_login()) {
+		if (!User::require_login()) {
 			return $this->get_poll($id);
 		}
 		
 		$this->verify($id, 'votable');
 		
-		$v = Votes::query()->where('poll_id',$id)->where('user_id',\User::$user->id)->single();
+		$v = Votes::query()
+			->where('poll_id',$id)
+			->where('user_id',User::$user->id)
+			->single();
 		$poll = Poll::get($id);
 		$options = $poll->options;
 		$question = $poll->question;
@@ -62,7 +71,7 @@ class API extends \Restful {
 		
 		$rv = array();
 		$rv['id'] = $id;
-		$rv['html'] = \View::render(
+		$rv['html'] = View::render(
 			'polls/vote', array(
 				'id'=>$id,
 				'allowed'=>$allowed,
@@ -76,7 +85,7 @@ class API extends \Restful {
 		
 	}
 	public function post_vote($id) {
-		if (!\User::require_login()) {
+		if (!User::require_login()) {
 			return $this->get_poll($id);
 		}
 		
@@ -85,14 +94,14 @@ class API extends \Restful {
 		
 		$v = Votes::query()
 			->where('poll_id',$id)
-			->where('user_id',\User::$user->id)
+			->where('user_id',User::$user->id)
 			->single();
 		if (!$v || $v->error) {
 			$v = new Votes (array(
 				'poll_id' => $id,
 				'ts' => gmdate ('Y-m-d H:i:s'),
 				'ip' => $_SERVER['REMOTE_ADDR'], //forward compatibility for future anonymous voting feature
-				'user_id' => \User::$user->id
+				'user_id' => User::$user->id
 			));
 		}
 		$v->votes = $_POST['data'];

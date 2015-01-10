@@ -46,12 +46,13 @@ var poll = (function($) {
 		}
 	
 	};
-	self.get = function(id, get) {
+	self.get = function(id, get, force) {
 		if (self.info.attr('loading') !== true) {
 			self.info.attr('loading',true);
 			self.info.text('Loading poll...');
 			self.info.show();
-			$.get('/polls/api/'+ get +'/'+ id, {data:{}}, null, 'json'
+			if (!force) force = '';
+			$.get('/polls/api/'+ get +'/'+ id + force, {data:{}}, null, 'json'
 			).done(function(res){
 				if (res.success) {
 					self.info.attr('current',res.data.id);
