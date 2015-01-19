@@ -14,7 +14,7 @@ $offset = $num * $limit;
 $items = polls\Poll::query()
 	->order('edited','desc')
 	->fetch($limit, $offset);
-
+$items ? items : array();
 $data = array (
 	'limit' => $limit,
 	'total' => polls\Poll::query()
