@@ -55,7 +55,7 @@ var poll = (function($) {
 			$.get('/polls/api/'+ get +'/'+ id + force, {data:{}}, null, 'json'
 			).done(function(res){
 				if (res.success) {
-					self.info.attr('current',res.data.id);
+					self.info.attr('data-current',res.data.id);
 					self.info.text('Poll loaded successfully.');
 					self.info.show();
 					self.node.html(res.data.html);
@@ -66,7 +66,7 @@ var poll = (function($) {
 			}).fail(function(){
 				self.info.text('Failed to load requested poll.');
 			}).always(function(){
-				self.info.attr('loading',false);
+				self.info.attr('data-loading',false);
 				clearTimeout(self.timeout);
 				self.timeout = setTimeout(function(){
 					self.info.hide();

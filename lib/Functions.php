@@ -5,16 +5,14 @@ function polls_list_all () {
 		->order ('title asc')
 		->fetch_assoc ('id', 'title');
 	$out = array ();
-	foreach ($res as $k => $v) {
+	$out[] = (object) array (
+		'key' => 'default',
+		'value' => 'Default'
+	);
+	if ($res) foreach ($res as $k => $v) {
 		$out[] = (object) array (
 			'key' => $k,
 			'value' => $v
-		);
-	}
-	if (!$out) {
-		$out[] = (object) array (
-			'key' => '',
-			'value' => '- No Polls Available -'
 		);
 	}
 	return $out;
