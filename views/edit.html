@@ -5,7 +5,7 @@
 	<input name="question" type="text" value="{{ question }}" size="70" maxlength="140" onkeyup="$('#poll_desc_count').text(140 - $(this).val().length);" required /><br/>
 	<input type="checkbox" name="votable" id="poll_votable" {% if votable %}checked{% end %}/> <label for="poll_votable">Can Be Voted On?</label><br/>
 	<input type="checkbox" name="visible" id="poll_visible" {% if visible %}checked{% end %}/> <label for="poll_visible">Is Viewable By Public?</label><br/>
-	<input type="checkbox" name="default" id="poll_default" {% if default %}checked{% end %}/> <label for="poll_default">Is Default?</label><br/>
+	<input type="checkbox" name="fallback" id="poll_default" {% if fallback %}checked{% end %}/> <label for="poll_default">Is Default?</label><br/>
 	<label>Allowed Choices (max)</label><br/>
 	<input id="poll_allowed" name="allowed" type="number" min="1" {% if options %}max="{{ options|count }}" {% end %}value="{% if allowed %}{{ allowed }}{% else %}1{% end %}" required /><br/>
 	<label>Required Choices (min)</label><br/>

@@ -26,7 +26,7 @@
 		<td>{{ loop_value->creator|User::get(%s)->name }} on {{ loop_value->created|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
 		<td>{{ loop_value->editor|User::get(%s)->name }} on {{ loop_value->edited|date ('F j, Y - g:ia', strtotime (%s)) }}</td>
 		<td><a href="/polls/votes/{{ loop_value->id }}" title="{" Browse results "}">{{ loop_value->id|polls_votes_count }}</a></td>
-		<td>{% if loop_value->default %}Yes{% else %}No{% end %}</td>
+		<td>{% if loop_value->fallback %}Yes{% else %}No{% end %}</td>
 		<td style="text-align: right">
 			<a href="/polls/edit/{{ loop_value->id }}">{"Edit"}</a>
 			&nbsp;|&nbsp;

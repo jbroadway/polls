@@ -8,7 +8,7 @@ $cur = $this->installed ('polls', $appconf['Admin']['version']);
 
 if ($cur === true) {
 	$page->title = 'Already installed';
-	echo '<p><a href="/pollsadmin">Continue</a></p>';
+	echo '<p><a href="/polls/admin">Continue</a></p>';
 	return;
 } elseif ($cur !== false) {
 	header ('Location: /' . $appconf['Admin']['upgrade']);

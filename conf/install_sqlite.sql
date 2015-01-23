@@ -1,4 +1,4 @@
-create table polls (
+create table #prefix#polls (
 	id integer primary key,
 	title varchar(48) not null,
 	question varchar(140) not null,
@@ -13,10 +13,10 @@ create table polls (
 	fallback boolean default 0,
 	options text not null
 );
-create index polls_fallback on polls (fallback);
-create index polls_visible on polls (visible);
+create index #prefix#polls_fallback on #prefix#polls (fallback);
+create index #prefix#polls_visible on #prefix#polls (visible);
 
-create table polls_votes (
+create table #prefix#polls_votes (
 	id integer primary key,
 	poll_id integer not null,
 	ts datetime not null,
@@ -24,4 +24,4 @@ create table polls_votes (
 	user_id integer,
 	votes text not null
 );
-create index polls_id on polls_votes (poll_id, ts);
+create index #prefix#polls_id on #prefix#polls_votes (poll_id, ts);

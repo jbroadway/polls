@@ -3,7 +3,7 @@
 namespace polls;
 
 class Votes extends \ExtendedModel {
-	public $table = 'polls_votes';
+	public $table = '#prefix#polls_votes';
 	public $_extended_field = 'votes';
 	public $fields = array (
         'poll' => array (

@@ -4,10 +4,12 @@ if (!$this->internal) {
 	$page->window_title = "Polls";
 }
 
-$id = (isset ($this->params[0])) ? (int) $this->params[0] : (isset ($data['id']) ? (int) $data['id'] : 0);
+$id = (isset ($this->params[0])) ? $this->params[0] === 'default' ? false :(int) $this->params[0] : (isset ($data['id']) ? (int) $data['id'] : 0);
 $async = (isset($data['async']) && $data['async']) ? true : false;
 
 $page->add_script('/apps/polls/js/poll.js','head');
+
+if (!$id) $id = polls\Poll::get_default()->id;
 
 if (!$this->internal || $async) {
 	echo View::render('polls/head', array(

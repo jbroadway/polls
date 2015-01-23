@@ -3,7 +3,7 @@
 namespace polls;
 
 class Poll extends \ExtendedModel {
-	public $table = 'polls';
+	public $table = '#prefix#polls';
 	public $_extended_field = 'options';
 	public $fields = array (
         'votes' => array (
@@ -21,24 +21,28 @@ class Poll extends \ExtendedModel {
 		$options = $options ? $options : array();
 		$votes = array();
 		$mine = array();
-		$user = \User::is_valid() ? \User::$user->id : 0;
+		$user = \User::is_valid() ? \User::$user->id : false;
 		foreach($options as $option => $text) {
 			$votes[$text] = 0;
 			$mine[$text] = 0;
 			foreach($list as $entry) {
 				foreach($entry->votes as $choice => $state) {
 					if ($text == $choice && $state == 'true') {
-						if ($user == $entry->user_id) $mine[$text] = 1;
+						if ($user === $entry->user_id) $mine[$text] = 1;
 						$votes[$text] += 1;
 					}
 				}
 			}
 		}
-		$sum = array_sum($votes);
-		return array('total'=> $sum > 0 ? $sum : 1,'grouped'=>$votes,'mine'=>$mine);
+		return array('total'=>array_sum($votes),'grouped'=>$votes,'mine'=>$mine);
 	}
 	public function option($index) {
 		return $this->options[$index];
+	}
+	public static function get_default() {
+		return self::query()
+			->where('fallback', true)
+			->single();
 	}
 }
 
